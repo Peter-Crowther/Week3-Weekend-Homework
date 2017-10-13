@@ -1,4 +1,5 @@
 require_relative ("../db/sql_runner.rb")
+require_relative ("customer.rb")
 
 class Film
 attr_reader :id
@@ -42,10 +43,25 @@ attr_accessor :title, :price
       SqlRunner.run(sql, values)
   end
 
-  def delete
+  def delete()
     sql = "DELETE FROM films WHERE id = $1"
     values = [@id]
     SqlRunner.run(sql, values)
   end
+
+  def customers()
+    sql = "SELECT customers.* FROM customers
+          INNER JOIN tickets
+          ON customers.id = tickets.customer_id
+          WHERE film_id = $1"
+    values = [@id]
+    results = SqlRunner.run(sql, values)
+    customers = results.map{|customer|Customer.new(customer)}
+    return customers
+  end
+
+
+
+
 
 end
