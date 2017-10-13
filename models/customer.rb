@@ -35,11 +35,11 @@ attr_accessor :name, :funds
     end
 
     def update()
-        sql = "UPDATE bounties
-                SET (name, species, bounty_value, danger_level) = ($1, $2, $3, $4)
-                WHERE id = $5
+        sql = "UPDATE customers
+                SET (name, funds) = ($1, $2)
+                WHERE id = $3
         "
-        values = [@name, @species, @bounty_value, @danger_level, @id]
+        values = [@name, @funds]
         SqlRunner.run(sql, values)
     end
 
