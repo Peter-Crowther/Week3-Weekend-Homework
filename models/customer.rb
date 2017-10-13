@@ -1,4 +1,4 @@
-class User
+class Customer
 attr_accessor :name, :funds
 attr_reader :id
   def initialize(options)
