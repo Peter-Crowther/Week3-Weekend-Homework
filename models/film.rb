@@ -14,6 +14,14 @@ attr_reader :id, :title, :price
           "
     values = [@title, @price]
     @id = SqlRunner.run(sql, values)[0]["id"].to_i()
-
   end
+
+  def self.all()
+    sql = "SELECT * FROM films"
+    values = []
+    results = SqlRunner.run(sql, values)
+    film_details = results.map{ |film| Film.new(film)}
+    return film_details
+  end
+
 end
