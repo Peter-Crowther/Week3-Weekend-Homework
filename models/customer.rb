@@ -34,6 +34,15 @@ attr_accessor :name, :funds
       SqlRunner.run(sql, values)
     end
 
+    def update()
+        sql = "UPDATE bounties
+                SET (name, species, bounty_value, danger_level) = ($1, $2, $3, $4)
+                WHERE id = $5
+        "
+        values = [@name, @species, @bounty_value, @danger_level, @id]
+        SqlRunner.run(sql, values)
+    end
+
 
 
 
