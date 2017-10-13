@@ -21,6 +21,20 @@ attr_accessor :customer_id, :film_id
     @id = SqlRunner.run(sql, values)[0]["id"].to_i()
   end
 
+  def delete
+    sql = "DELETE FROM tickets WHERE id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
+
+  def self.all()
+    sql = "SELECT * FROM tickets"
+    values = []
+    results = SqlRunner.run(sql, values)
+    tickets = results.map{ |ticket| Ticket.new(ticket)}
+    return tickets
+  end
+
   def film
     sql = "SELECT * FROM films
     WHERE id = $1"
